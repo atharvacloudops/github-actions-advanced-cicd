@@ -1,0 +1,27 @@
+name: Setup Python App
+description: Composite action to setup Python environment
+
+inputs:
+  python-version:
+    description: Python version to use
+    required: false
+    default: "3.11"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-${{ runner.os }}-${{ hashFiles('app/requirements.txt') }}
+        restore-keys: pip-${{ runner.os }}-
+
+    - name: Install dependencies
+      shell: bash
+      run: pip install -r app/requirements.txt

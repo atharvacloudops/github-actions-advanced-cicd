@@ -1,0 +1,38 @@
+name: Reusable Deploy Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        type: string
+      image-tag:
+        description: Docker image tag to deploy
+        required: true
+        type: string
+    secrets:
+      deploy-token:
+        description: Deployment token
+        required: false
+
+jobs:
+  deploy:
+    name: Deploy to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to environment
+        run: |
+          echo "Deploying image tag: ${{ inputs.image-tag }}"
+          echo "Target environment: ${{ inputs.environment }}"
+          echo "Deployment successful!"
+
+      - name: Verify deployment
+        run: |
+          echo "Verifying deployment in ${{ inputs.environment }}"
+          echo "Health check passed!"

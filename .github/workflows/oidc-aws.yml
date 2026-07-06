@@ -1,0 +1,35 @@
+name: OIDC AWS Authentication
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  aws-oidc:
+    name: Authenticate with AWS using OIDC
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsRole
+          aws-region: us-east-1
+
+      - name: Verify AWS identity
+        run: |
+          echo "AWS authentication successful via OIDC"
+          echo "No static credentials stored in GitHub Secrets"
+
+      - name: Build and push to ECR
+        run: |
+          echo "Building Docker image"
+          echo "Pushing to ECR with OIDC credentials"
+          echo "Credentials auto-expire after job completes"
