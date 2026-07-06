@@ -7,23 +7,29 @@ and release automation pipeline.
 ---
 
 ## 📁 Project Structure
+
+```text
 github-actions-advanced-cicd/
 ├── app/
-│   ├── main.py                          # FastAPI application
-│   ├── requirements.txt                 # Python dependencies
-│   └── test_main.py                     # Pytest test suite
+│   ├── main.py                     # FastAPI application
+│   ├── requirements.txt            # Python dependencies
+│   └── test_main.py                # Pytest test suite
+│
 ├── .github/
 │   ├── actions/
 │   │   └── setup-python-app/
-│   │       └── action.yml               # Composite reusable action
+│   │       └── action.yml          # Composite reusable action
+│   │
 │   └── workflows/
-│       ├── matrix-test.yml              # Matrix builds across OS + Python
-│       ├── reusable-deploy.yml          # Reusable deployment workflow
-│       ├── oidc-aws.yml                 # OIDC keyless AWS authentication
-│       └── release.yml                  # Full release automation pipeline
-├── Dockerfile                           # Multi-stage production image
-├── .dockerignore                        # Build context exclusions
-└── README.md                            # Project documentation
+│       ├── matrix-test.yml         # Matrix builds across OS & Python versions
+│       ├── reusable-deploy.yml     # Reusable deployment workflow
+│       ├── oidc-aws.yml            # OIDC keyless AWS authentication
+│       └── release.yml             # Automated release pipeline
+│
+├── Dockerfile                      # Multi-stage production image
+├── .dockerignore                   # Build context exclusions
+└── README.md                       # Project documentation
+```
 
 ---
 
