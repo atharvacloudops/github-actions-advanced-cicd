@@ -17,19 +17,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsRole
-          aws-region: us-east-1
-
-      - name: Verify AWS identity
+      - name: Simulate OIDC AWS Authentication
         run: |
-          echo "AWS authentication successful via OIDC"
-          echo "No static credentials stored in GitHub Secrets"
+          echo "=== OIDC Keyless AWS Authentication ==="
+          echo "In production this step would:"
+          echo "1. Request JWT token from GitHub OIDC provider"
+          echo "2. Exchange JWT with AWS STS for temporary credentials"
+          echo "3. Assume IAM role: arn:aws:iam::ACCOUNT:role/GitHubActionsRole"
+          echo "4. Credentials auto-expire after job - no static keys stored"
+          echo "========================================"
+          echo "OIDC Authentication simulated successfully"
 
-      - name: Build and push to ECR
+      - name: Simulate ECR Push
         run: |
-          echo "Building Docker image"
-          echo "Pushing to ECR with OIDC credentials"
-          echo "Credentials auto-expire after job completes"
+          echo "Building Docker image..."
+          echo "Pushing to ECR with OIDC temporary credentials..."
+          echo "No AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY used!"
+          echo "Done!"
