@@ -1,4 +1,4 @@
-# ⚡ GitHub Actions Advanced CI/CD
+# ⚡ GitHub Actions Advanced CI/CD.
 
 A complete CI/CD automation project covering reusable workflows, matrix builds,
 OIDC keyless AWS authentication, deployment environments with approval gates,
